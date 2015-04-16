@@ -1,0 +1,117 @@
+﻿@using SqlServerVersions.ViewModels
+@model SqlServerVersions.ViewModels.SupportabilityViewModel
+
+@{
+    ViewBag.Title = "Supportability";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    using (Html.BeginForm("Supportability", "Home", FormMethod.Post))
+    {
+        <div class="supportability">
+            <table>
+                <tr>
+                    <td colspan="2" class="top-select">
+                        @Html.DropDownListFor(m => m.SelectedId, new SelectList(Model.MajorMinorBaseVersions, "Id", "FriendlyNameShort"), new { onchange = "this.form.submit();" })
+                    </td>
+                </tr>  
+                
+                <tr class="supportability-headers">
+                    <td>
+                        newest supported
+                    </td>
+                    <td>
+                        oldest supported
+                    </td>
+                </tr>              
+
+                @foreach (SupportabilityBoundaries boundaries in Model.VersionBoundaries)
+                {
+                    if (boundaries.NewestSupported != null)
+                    {
+                        <tr>
+                            <td class="supported-builds">
+                                @Html.ActionLink(
+                                    string.Format("{0}.{1}.{2}.{3}", 
+                                        boundaries.NewestSupported.Major,
+                                        boundaries.NewestSupported.Minor,
+                                        boundaries.NewestSupported.Build,
+                                        boundaries.NewestSupported.Revision),
+                                    "VersionSearch",
+                                    "Home",
+                                    new 
+                                    {
+                                        major = boundaries.NewestSupported.Major,
+                                        minor = boundaries.NewestSupported.Minor,
+                                        build = boundaries.NewestSupported.Build,
+                                        revision = boundaries.NewestSupported.Revision
+                                    }, 
+                                    null)
+                                <br />
+                                @string.Format("{0}", boundaries.NewestSupported.FriendlyNameShort)
+                                <br />
+                                @string.Format("Released on {0:d}", boundaries.NewestSupported.ReleaseDate)
+                            </td>
+
+                            @if (boundaries.OldestSupported != null)
+                            {
+                                if (boundaries.OldestSupported.Major == boundaries.NewestSupported.Major &&
+                                    boundaries.OldestSupported.Minor == boundaries.NewestSupported.Minor &&
+                                    boundaries.OldestSupported.Build == boundaries.NewestSupported.Build &&
+                                    boundaries.OldestSupported.Revision == boundaries.NewestSupported.Revision)
+                                {
+                                    <td class="least-supported-build">
+                                        &lt-- that's it
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="least-supported-build">
+                                        @Html.ActionLink(
+                                            string.Format("{0}.{1}.{2}.{3}",
+                                                boundaries.OldestSupported.Major,
+                                                boundaries.OldestSupported.Minor,
+                                                boundaries.OldestSupported.Build,
+                                                boundaries.OldestSupported.Revision),
+                                            "VersionSearch",
+                                            "Home",
+                                            new
+                                            {
+                                                major = boundaries.OldestSupported.Major,
+                                                minor = boundaries.OldestSupported.Minor,
+                                                build = boundaries.OldestSupported.Build,
+                                                revision = boundaries.OldestSupported.Revision
+                                            },
+                                            null)
+                                        <br />
+                                        @string.Format("{0}", boundaries.OldestSupported.FriendlyNameShort)
+                                        <br />
+                                        @string.Format("Released on {0:d}", boundaries.OldestSupported.ReleaseDate)
+                                    </td>
+                                }
+                            }
+                            else
+                            {
+                                <td class="no-corresponding-build">
+                                    no corresponding
+                                </td>
+                            }
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="2" class="no-supported-builds">
+                                no supported versions for
+                                <br />
+                                @string.Format("{0}", boundaries.BaseVersion.FriendlyNameShort)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    }
+}

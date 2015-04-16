@@ -1,0 +1,86 @@
+﻿@model SqlServerVersions.ViewModels.VersionSearchViewModel
+
+@using (Html.BeginForm("VersionSearch", "Home")) {
+    <div class="version-search">
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m.Major)            
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Minor)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Build)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Revision)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="submit" value="search" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    @Html.ValidationSummary()
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+
+@if (Model != null && Model.IsSearchedFor)
+{
+    <div class="search-results">
+        @if (Model.FoundVersion == null)
+        {
+            <p class="no-results">
+                sorry, I couldn't find that :-(
+            </p>
+        }
+        else
+        {
+        <table>
+            <tr>
+                <td>
+                    @string.Format("{0}.{1}.{2}.{3}", Model.FoundVersion.Major, Model.FoundVersion.Minor, Model.FoundVersion.Build, Model.FoundVersion.Revision)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.FoundVersion.FriendlyNameLong
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Released on @string.Format("{0:d}", Model.FoundVersion.ReleaseDate)
+                </td>
+            </tr>
+            <tr>
+                @if (Model.FoundVersion.IsSupported)
+                {
+                    <td class="supported">
+                        Supported
+                    </td>
+                }
+                else
+                {
+                    <td class="unsupported">
+                        Unsupported
+                    </td>
+                }
+            </tr>
+            @foreach (string VersionRefUri in Model.FoundVersion.ReferenceLinks)
+            {
+                <tr>
+                    <td>
+                        <a href="@VersionRefUri">@VersionRefUri</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        }
+    </div>
+}

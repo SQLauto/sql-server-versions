@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @*@Styles.Render("~/Content/css")*@
+        @Styles.Render("~/Content/Site2.css")
+    </head>
+    <body>
+        <div class="main-display">
+            <div class="site-header">
+                @Html.ActionLink("SQL Server Versions", "Index", "Home")
+            </div>
+            <div class="nav-bar">
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-item" })
+                @Html.ActionLink("Recent Releases", "RecentRelease", "Home", new { major = 0 }, new { @class = "nav-item" })
+                @Html.ActionLink("Supportability", "Supportability", "Home", new { major = 0 }, new { @class = "nav-item" })
+            </div>
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+    </body>
+</html>

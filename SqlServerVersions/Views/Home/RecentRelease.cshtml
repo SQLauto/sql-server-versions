@@ -1,0 +1,46 @@
+﻿@using SqlServerVersions.Models
+@model SqlServerVersions.ViewModels.RecentReleaseViewModel
+
+@{
+    ViewBag.Title = "RecentRelease";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model != null)
+{
+    using (Html.BeginForm("RecentRelease", "Home", FormMethod.Post))
+    { 
+        <div class="recent-release">
+            @Html.DropDownListFor(m => m.SelectedId, new SelectList(Model.MajorMinorBaseVersions, "Id", "FriendlyNameShort"), new { onchange = "this.form.submit();" })
+                            
+            @foreach (VersionInfo versionInfo in Model.RecentVersions.OrderByDescending(m => m.ReleaseDate))
+            {
+                <table>
+                    <tr>
+                        <td>
+                            @string.Format("{0}.{1}.{2}.{3}", versionInfo.Major, versionInfo.Minor, versionInfo.Build, versionInfo.Revision)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @versionInfo.FriendlyNameLong
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Released on @string.Format("{0:d}", versionInfo.ReleaseDate)
+                        </td>
+                    </tr>
+                    @foreach (string RefLink in versionInfo.ReferenceLinks)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@RefLink">@RefLink</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    }
+}

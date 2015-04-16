@@ -1,0 +1,189 @@
+﻿body {
+    font-family: 'Segoe UI'
+}
+
+.validation-summary-errors {
+    color: red;
+}
+.validation-summary-errors li {
+    list-style-type: none;
+}
+
+.main-display {
+    width: 700px;
+    background-color: lightgray;
+    border-width: 1px;
+    border-color: gray;
+    border-style: solid;
+    margin: 0 auto;
+}
+
+.site-header {
+    font-size: xx-large;
+    text-align: center;
+    color: black;
+}
+
+.site-header a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-bar {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.nav-bar a {
+    font-size: small;
+    text-decoration: none;
+    color: blue;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.version-search {
+    text-align: center;
+}
+
+.version-search input {
+    font-family: 'Segoe UI';
+    text-align: center;
+}
+
+.version-search input[type="text"] {
+    width: 55px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.version-search input[type="submit"] {
+    margin-top: 10px;
+    color: darkslategray;
+}
+
+.version-search table {
+    margin: 0 auto;
+}
+
+.search-results {
+    text-align: center;
+}
+
+.search-results .no-results {
+    color: gray;
+    margin-bottom: 40px;
+}
+
+.search-results table {
+    color: darkslategray;
+    font-size: large;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.search-results .supported {
+    color: green;
+}
+
+.search-results .unsupported {
+    color: red;
+}
+
+.search-results a {
+    text-decoration: none;
+    color: blue;
+}
+
+.recent-release {
+    text-align: center;
+}
+
+.recent-release table {
+    color: darkslategray;
+    font-size: large;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.recent-release a {
+    text-decoration: none;
+    color: blue;
+}
+
+.recent-release select {
+    color: darkslategray;
+    margin-top: 20px;
+    font-size: medium;
+    font-family: 'Segoe UI'
+}
+
+.supportability {
+    text-align: center;
+}
+
+.supportability table {
+    margin: 0 auto;
+    border-spacing: 20px;
+    color: darkslategray;
+}
+
+.supportability select {
+    color: darkslategray;
+    font-size: medium;
+    font-family: 'Segoe UI'
+}
+
+.supportability .top-select {
+    text-align: center;
+}
+
+.supportability-headers {
+    color: gray;
+    text-align: center;
+    font-size: medium;
+}
+
+.supportability-headers td {
+    width: 50%;
+}
+
+.supportability .supported-builds {
+    border-color: rgba(0, 255, 0, 0.35);
+    border-style: solid;
+    border-width: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+.supportability .least-supported-build {
+    border-color: rgba(255, 255, 0, 0.35);
+    border-style: solid;
+    border-width: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+.supportability .no-corresponding-build {
+    border-color: rgba(255, 0, 0, 0.35);
+    border-style: solid;
+    border-width: 2px;
+}
+
+.supportability .no-supported-builds {
+    border-color: rgba(255, 0, 0, 0.35);
+    border-style: solid;
+    border-width: 2px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.supportability a {
+    color: blue;
+    text-decoration: none;
+}
