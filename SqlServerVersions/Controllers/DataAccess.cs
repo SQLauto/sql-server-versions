@@ -754,5 +754,72 @@ namespace SqlServerVersions.Controllers
                 }
             }
         }
+
+        public IEnumerable<Build> GetBackFillBuilds()
+        {
+            DataTable output = new DataTable();
+
+            using (SqlConnection databaseConnection = new SqlConnection(_connectionString))
+            using (SqlCommand sqlCmd = new SqlCommand())
+            using (SqlDataAdapter sda = new SqlDataAdapter(sqlCmd))
+            {
+                sqlCmd.Connection = databaseConnection;
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.CommandText = "dbo.BuildGetAllBackFill";
+
+                try
+                {
+                    sda.Fill(output);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogMessage(new LogEntry() { Message = ex.Message, StackTrace = ex.StackTrace });
+                    yield break;
+                }
+
+                foreach (DataRow row in output.Rows)
+                    yield return new Build()
+                    {
+                        Major = Convert.ToInt32(row["Major"]),
+                        Minor = Convert.ToInt32(row["Minor"]),
+                        Build = Convert.ToInt32(row["Build"]),
+                        Revision = Convert.ToInt32(row["Revision"])
+                    };
+            }
+        }
+        public Build GetRandomBackFillBuild()
+        {
+            DataTable output = new DataTable();
+
+            using (SqlConnection databaseConnection = new SqlConnection(_connectionString))
+            using (SqlCommand sqlCmd = new SqlCommand())
+            using (SqlDataAdapter sda = new SqlDataAdapter(sqlCmd))
+            {
+                sqlCmd.Connection = databaseConnection;
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.CommandText = "dbo.BuildGetRandomBackFill";
+
+                try
+                {
+                    sda.Fill(output);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogMessage(new LogEntry() { Message = ex.Message, StackTrace = ex.StackTrace });
+                    return null;
+                }
+
+                if (output.Rows.Count == 0)
+                    return null;
+                else
+                    return new Build()
+                    {
+                        Major = Convert.ToInt32(output.Rows[0]["Major"]),
+                        Minor = Convert.ToInt32(output.Rows[0]["Minor"]),
+                        Build = Convert.ToInt32(output.Rows[0]["Build"]),
+                        Revision = Convert.ToInt32(output.Rows[0]["Revision"])
+                    };
+            }
+        }
     }
 }

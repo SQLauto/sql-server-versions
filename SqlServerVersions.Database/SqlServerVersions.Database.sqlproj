@@ -84,6 +84,7 @@
     <Build Include="Procedures\VersionGetRecentAndOldestSupported.sql" />
     <Build Include="Tables\ErrorLog.sql" />
     <Build Include="Procedures\ErrorLogAddMessage.sql" />
+    <Build Include="Tables\VersionBackFill.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlServerVersions.Database.publish.xml" />
