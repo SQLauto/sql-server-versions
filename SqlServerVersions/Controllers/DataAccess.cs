@@ -821,5 +821,13 @@ namespace SqlServerVersions.Controllers
                     };
             }
         }
+        public int GetBackFillBuildsCount()
+        {
+            IEnumerable<Build> builds = GetBackFillBuilds();
+            if (builds == null)
+                return 0;
+            else
+                return builds.Count();
+        }
     }
 }
