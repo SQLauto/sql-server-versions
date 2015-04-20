@@ -48,7 +48,6 @@ namespace SqlServerVersions.Controllers
                 return View("Index");
             }
         }
-
         [HttpGet]
         public ActionResult VersionSearch(int major, int minor, int build, int revision)
         {
@@ -89,7 +88,6 @@ namespace SqlServerVersions.Controllers
                     SelectedId = PreSelectedId
                 });
         }
-
         [HttpPost]
         public ActionResult RecentRelease(RecentReleaseViewModel recentReleaseViewModel)
         {
@@ -153,7 +151,6 @@ namespace SqlServerVersions.Controllers
                     VersionBoundaries = Boundaries
                 });
         }
-
         [HttpPost]
         public ActionResult Supportability(SupportabilityViewModel supportabilityViewModel)
         {
@@ -197,6 +194,19 @@ namespace SqlServerVersions.Controllers
                 OldestSupported = LowestSupported,
                 NewestSupported = HighestSupported
             };
+        }
+
+        [HttpGet]
+        public ActionResult BackFill()
+        {
+            BackFillViewModel viewModel = new BackFillViewModel();
+
+            DataAccess dataAccess = new DataAccess();
+
+            viewModel.BackFillBuild = (dataAccess).GetRandomBackFillBuild();
+            viewModel.BackFillCount = (dataAccess).GetBackFillBuildsCount();
+
+            return View(viewModel);
         }
     }
 }

@@ -171,6 +171,7 @@
     <Compile Include="Models\Build.cs" />
     <Compile Include="Models\VersionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BackFillViewModel.cs" />
     <Compile Include="ViewModels\RecentReleaseViewModel.cs" />
     <Compile Include="ViewModels\SupportabilityBoundaries.cs" />
     <Compile Include="ViewModels\SupportabilityViewModel.cs" />
@@ -217,6 +218,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\RecentRelease.cshtml" />
     <Content Include="Views\Home\Supportability.cshtml" />
+    <Content Include="Views\Home\BackFill.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
