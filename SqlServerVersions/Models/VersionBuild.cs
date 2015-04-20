@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SqlServerVersions.Models
 {
-    public class Build
+    public class VersionBuild
     {
         public int Major { get; set; }
         public int Minor { get; set; }

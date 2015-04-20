@@ -755,7 +755,7 @@ namespace SqlServerVersions.Controllers
             }
         }
 
-        public IEnumerable<Build> GetBackFillBuilds()
+        public IEnumerable<VersionBuild> GetBackFillBuilds()
         {
             DataTable output = new DataTable();
 
@@ -778,7 +778,7 @@ namespace SqlServerVersions.Controllers
                 }
 
                 foreach (DataRow row in output.Rows)
-                    yield return new Build()
+                    yield return new VersionBuild()
                     {
                         Major = Convert.ToInt32(row["Major"]),
                         Minor = Convert.ToInt32(row["Minor"]),
@@ -787,7 +787,7 @@ namespace SqlServerVersions.Controllers
                     };
             }
         }
-        public Build GetRandomBackFillBuild()
+        public VersionBuild GetRandomBackFillBuild()
         {
             DataTable output = new DataTable();
 
@@ -812,7 +812,7 @@ namespace SqlServerVersions.Controllers
                 if (output.Rows.Count == 0)
                     return null;
                 else
-                    return new Build()
+                    return new VersionBuild()
                     {
                         Major = Convert.ToInt32(output.Rows[0]["Major"]),
                         Minor = Convert.ToInt32(output.Rows[0]["Minor"]),
@@ -823,7 +823,7 @@ namespace SqlServerVersions.Controllers
         }
         public int GetBackFillBuildsCount()
         {
-            IEnumerable<Build> builds = GetBackFillBuilds();
+            IEnumerable<VersionBuild> builds = GetBackFillBuilds();
             if (builds == null)
                 return 0;
             else

@@ -8,7 +8,7 @@ namespace SqlServerVersions.ViewModels
 {
     public class BackFillViewModel
     {
-        public Build BackFillBuild { get; set; }
+        public VersionBuild BackFillBuild { get; set; }
         public int BackFillCount { get; set; }
     }
 }

@@ -5,5 +5,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>BackFill</h2>
+@if (Model != null)
+{
+    using (Html.BeginForm("BackFill", "Home", FormMethod.Post))
+    {
+        <div class="backfill">
+            <table>
+                <tr>
+                    <td>
+                        Remaining back fill items: @Model.BackFillCount
+                    </td>
+                </tr>
+                @if (Model.BackFillBuild == null && Model.BackFillCount == 0)
+                {
+                    <tr>
+                        <td>
+                            <b>all done!</b>  no more back fill verions!!!<br />
+                            <i>a special thanks to all those that have contributed to back filling version for the community</i>
+                        </td>
+                    </tr>
+                }                
+            </table>
+        </div>
+    }
+}
 
