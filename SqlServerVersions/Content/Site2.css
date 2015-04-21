@@ -196,10 +196,35 @@
     color: darkslategray;
     font-size: large;
     margin: 0 auto;
-    margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .backfill td {
     padding-top: 15px;
+}
+
+.backfill .example {
+    padding-top: 0px;
+    font-size: x-small;
+    font-style: italic;
+    text-align: left;
+    padding-left: 50px;
+    color: #999999;
+}
+
+.backfill .example-supported {
+    padding-top: 0px;
+    font-size: x-small;
+    font-style: italic;
+    text-align: center;
+    color: #999999;
+}
+
+.backfill .question-fill-version {
+    font-size: smaller;
+}
+
+.backfill .field-label {
+    text-align: right;
+    font-size: small;
 }

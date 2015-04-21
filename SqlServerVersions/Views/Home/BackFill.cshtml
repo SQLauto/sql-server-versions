@@ -15,17 +15,88 @@
                     <td>
                         Remaining back fill items: @Model.BackFillCount
                     </td>
-                </tr>
-                @if (Model.BackFillBuild == null && Model.BackFillCount == 0)
-                {
+                </tr>              
+            </table>
+            @if (Model.BackFillBuild == null && Model.BackFillCount == 0)
+            {
+                <table>
                     <tr>
                         <td>
                             <b>all done!</b>  no more back fill verions!!!<br />
                             <i>a special thanks to all those that have contributed to back filling version for the community</i>
                         </td>
                     </tr>
-                }                
-            </table>
+                </table>
+            }
+            else
+            {
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <table>
+                                <tr>
+                                    <td colspan="2" class="question-fill-version">
+                                        can you fill in version info for <br /><b>@string.Format("{0}.{1}.{2}.{3}", Model.BackFillBuild.Major, Model.BackFillBuild.Minor, Model.BackFillBuild.Build, Model.BackFillBuild.Revision)</b>?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label">
+                                        long name
+                                    </td>
+                                    <td>
+                                        ... text box ...
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="example">
+                                        i.e. SQL Server 2012 Service Pack 1 Cumulative Update 3
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label">
+                                        short name
+                                    </td>
+                                    <td>
+                                        ... text box ...
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="example">
+                                        i.e. SQL 2012 SP1 CU3
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label">
+                                        release date
+                                    </td>
+                                    <td>
+                                        ... text box ...
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="example">
+                                        mm/dd/yyyy
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        supported
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="example-supported">
+                                        click to toggle
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="50%">
+
+                        </td>
+                    </tr>
+                </table>
+            }
+            
         </div>
     }
 }
