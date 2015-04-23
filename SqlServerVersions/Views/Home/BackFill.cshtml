@@ -13,7 +13,8 @@
             <table>
                 <tr>
                     <td>
-                        remaining back fill items: @Model.BackFillCount
+                        remaining back fill items: @Model.BackFillCount<br />
+                        <span id="hello">testing</span>
                     </td>
                 </tr>              
             </table>
@@ -44,7 +45,7 @@
                                         long name
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(m => m.FriendlyNameLong)
+                                        @Html.TextBoxFor(m => m.FriendlyNameLong, new { id = "input-friendlynamelong" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -57,7 +58,7 @@
                                         short name
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(m => m.FriendlyNameShort)
+                                        @Html.TextBoxFor(m => m.FriendlyNameShort, new { id = "input-friendlynameshort" })
                                     </td>
                                 </tr>
                                 <tr>
@@ -99,12 +100,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span id="friendlynamelong"></span>
+                                        <span id="repeat-friendlynamelong"></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span id="friendlynameshort"></span>
+                                        <span id="repeat-friendlynameshort"></span>
                                     </td>
                                 </tr>
                                 <tr>
