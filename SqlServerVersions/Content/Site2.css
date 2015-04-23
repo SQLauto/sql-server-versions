@@ -238,3 +238,14 @@
     color: red;
     visibility: hidden;
 }
+
+.backfill-supported {
+    color: green;
+}
+.backfill-unsupported {
+    color: red;
+}
+
+.backfill-supported-input {
+    cursor: pointer;
+}

@@ -30,4 +30,21 @@ $(document).ready(function () {
             }
         }
     });
+
+    $("#input-supported").click(function () {
+        if ($(this).hasClass("backfill-supported")) {
+            $(this).text("unsupported");
+            $(this).removeClass("backfill-supported").addClass("backfill-unsupported");
+
+            $("#repeat-issupported").text("Unsupported");
+            $("#repeat-issupported").removeClass("backfill-supported").addClass("backfill-unsupported");
+        }
+        else {
+            $(this).text("supported");
+            $(this).removeClass("backfill-unsupported").addClass("backfill-supported");
+
+            $("#repeat-issupported").text("Supported");
+            $("#repeat-issupported").removeClass("backfill-unsupported").addClass("backfill-supported");
+        }
+    });
 });
