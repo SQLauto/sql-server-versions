@@ -208,7 +208,7 @@
     font-size: x-small;
     font-style: italic;
     text-align: left;
-    padding-left: 50px;
+    padding-left: 10px;
     color: #999999;
 }
 
@@ -227,4 +227,8 @@
 .backfill .field-label {
     text-align: right;
     font-size: small;
+}
+
+.nav-item-backfill {
+    color: orange;
 }
