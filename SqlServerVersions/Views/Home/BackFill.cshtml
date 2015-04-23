@@ -71,12 +71,13 @@
                                         release date
                                     </td>
                                     <td>
-                                        @Html.TextBoxFor(m => m.ReleaseDate)
+                                        @Html.TextBoxFor(m => m.ReleaseDate, new { id = "input-releasedate" })
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="example">
-                                        mm/dd/yyyy
+                                        mm/dd/yyyy<br />
+                                        <span class="date-error">incorrect date format</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -110,7 +111,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Released on: <span id="releasedate"></span>
+                                        Released on: <span id="repeat-releasedate"></span>
                                     </td>
                                 </tr>
                                 <tr>
