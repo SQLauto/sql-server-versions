@@ -253,3 +253,12 @@
 .backfill .repeater {
     font-size: small;
 }
+
+.backfill input {
+    font-family: 'Segoe UI';
+    text-align: center;
+}
+
+.backfill input[type="submit"] {
+    color: darkslategray;
+}

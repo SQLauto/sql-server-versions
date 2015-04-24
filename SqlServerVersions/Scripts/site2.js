@@ -3,13 +3,41 @@
     return dateRegex.test(dateInput);
 }
 
+function isAllInputThereAndValid() {
+    if (
+        $("#input-friendlynamelong").val().trim() &&
+        $("#input-friendlynameshort").val().trim() &&
+        isDateValid($("#input-releasedate").val()) &&
+        $("#input-referencelink").val().trim()) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function enableSubmitIfNecessary() {
+    if (isAllInputThereAndValid()) {
+        $("#add-new-build").removeAttr("disabled");
+    }
+    else {
+        $("#add-new-build").attr("disabled", "disabled");
+    }
+}
+
 $(document).ready(function () {
     $("#input-friendlynamelong").keyup(function () {
         $("#repeat-friendlynamelong").text($(this).val());
+        enableSubmitIfNecessary();
     });
 
     $("#input-friendlynameshort").keyup(function () {
         $("#repeat-friendlynameshort").text($(this).val());
+        enableSubmitIfNecessary();
+    });
+
+    $("#input-releasedate").keyup(function () {
+        enableSubmitIfNecessary();
     });
 
     $("#input-releasedate").change(function () {
@@ -52,5 +80,6 @@ $(document).ready(function () {
         var inputRefLink = $(this).val();
         $("#repeat-referencelink").attr("href", inputRefLink);
         $("#repeat-referencelink").text(inputRefLink);
+        enableSubmitIfNecessary();
     });
 });
