@@ -7,6 +7,7 @@ adhoc.sql
 Script.PostDeployment.sql
 /PublishScripts
 *.pubxml
+BackFillDataSeeding.sql
 
 # User-specific files
 *.suo
