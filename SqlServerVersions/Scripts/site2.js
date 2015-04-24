@@ -22,7 +22,7 @@ $(document).ready(function () {
         else {
             if (isDateValid(releaseDateInput)) {
                 $(".date-error").css("visibility", "hidden");
-                $("#repeat-releasedate").text(releaseDateInput);
+                $("#repeat-releasedate").text("Released on: " + releaseDateInput);
             }
             else {
                 $("#repeat-releasedate").text("");
