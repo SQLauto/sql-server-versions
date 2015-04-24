@@ -47,4 +47,10 @@ $(document).ready(function () {
             $("#repeat-issupported").removeClass("backfill-unsupported").addClass("backfill-supported");
         }
     });
+
+    $("#input-referencelink").keyup(function () {
+        var inputRefLink = $(this).val();
+        $("#repeat-referencelink").attr("href", inputRefLink);
+        $("#repeat-referencelink").text(inputRefLink);
+    });
 });

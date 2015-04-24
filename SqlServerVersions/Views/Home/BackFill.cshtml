@@ -89,6 +89,14 @@
                                         click to toggle
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class="field-label">
+                                        reference link
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.ReferenceLink, new { id = "input-referencelink" })
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                         <td width="50%">
@@ -99,23 +107,28 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="repeater">
                                         <span id="repeat-friendlynamelong"></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="repeater">
                                         <span id="repeat-friendlynameshort"></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="repeater">
                                         Released on: <span id="repeat-releasedate"></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class="repeater">
                                         <span id="repeat-issupported" class="backfill-supported">Supported</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="repeater">
+                                        <a id="repeat-referencelink" />
                                     </td>
                                 </tr>
                             </table>

@@ -249,3 +249,7 @@
 .backfill-supported-input {
     cursor: pointer;
 }
+
+.backfill .repeater {
+    font-size: small;
+}

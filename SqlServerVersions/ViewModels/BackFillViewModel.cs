@@ -15,5 +15,6 @@ namespace SqlServerVersions.ViewModels
         public string FriendlyNameLong { get; set; }
         public string FriendlyNameShort { get; set; }
         public bool IsSupported { get; set; }
+        public string ReferenceLink { get; set; }
     }
 }
