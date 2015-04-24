@@ -93,6 +93,7 @@
     <None Include="SqlServerVersions.Database.publish.xml" />
     <None Include="adhoc.sql" />
     <None Include="SqlServerVersions.local.Database.publish.xml" />
+    <None Include="BackFillDataSeeding.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
