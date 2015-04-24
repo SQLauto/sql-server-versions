@@ -271,3 +271,10 @@
     color: red;
     font-style: italic;
 }
+
+.backfill .plea-message {
+    font-size: x-small;
+    font-style: italic;
+    padding-left: 20px;
+    padding-right: 20px;
+}
