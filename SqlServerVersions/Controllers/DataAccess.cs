@@ -712,7 +712,7 @@ namespace SqlServerVersions.Controllers
             }
         }
 
-        private void DeleteVersionInfo(VersionInfo versionInfo)
+        public void DeleteVersionInfo(VersionInfo versionInfo)
         {
             using (SqlConnection DatabaseConnection = new SqlConnection(_connectionString))
             using (SqlCommand SqlCmd = new SqlCommand())
@@ -828,6 +828,46 @@ namespace SqlServerVersions.Controllers
                 return 0;
             else
                 return builds.Count();
+        }
+        public bool DeleteBackFillBuild(VersionBuild versionBuild)
+        {
+            using (SqlConnection databaseConnection = new SqlConnection(_connectionString))
+            using (SqlCommand sqlCmd = new SqlCommand())
+            {
+                sqlCmd.Connection = databaseConnection;
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.CommandText = "dbo.BuildRemoveBackFill";
+
+                sqlCmd.Parameters.Add(new SqlParameter("@Major", SqlDbType.Int)
+                    {
+                        Value = versionBuild.Major
+                    });
+                sqlCmd.Parameters.Add(new SqlParameter("@Minor", SqlDbType.Int)
+                    {
+                        Value = versionBuild.Minor
+                    });
+                sqlCmd.Parameters.Add(new SqlParameter("@Build", SqlDbType.Int)
+                    {
+                        Value = versionBuild.Build
+                    });
+                sqlCmd.Parameters.Add(new SqlParameter("@Revision", SqlDbType.Int)
+                    {
+                        Value = versionBuild.Revision
+                    });
+
+                try
+                {
+                    databaseConnection.Open();
+                    sqlCmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogMessage(new LogEntry() { Message = ex.Message, StackTrace = ex.StackTrace });
+                    return false;
+                }
+
+                return true;
+            }
         }
     }
 }

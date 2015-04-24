@@ -205,13 +205,91 @@ namespace SqlServerVersions.Controllers
 
             viewModel.BackFillBuild = (dataAccess).GetRandomBackFillBuild();
             viewModel.BackFillCount = (dataAccess).GetBackFillBuildsCount();
+            viewModel.DisplayMessage = DisplayMessage.None;
+            viewModel.IsSupported = true;
 
             return View(viewModel);
         }
-        //[HttpPost]
-        //public ActionResult BackFill(BackFillViewModel backFillViewModel)
-        //{
+        [HttpPost]
+        public ActionResult BackFill(BackFillViewModel backFillViewModel)
+        {
+            if (!string.IsNullOrWhiteSpace(backFillViewModel.FriendlyNameLong) &&
+                !string.IsNullOrWhiteSpace(backFillViewModel.FriendlyNameShort) &&
+                backFillViewModel.ReleaseDate.HasValue &&
+                !string.IsNullOrWhiteSpace(backFillViewModel.ReferenceLink))
+            {
+                DataAccess dataAccess = new DataAccess();
+                VersionInfo newVersionInfo = new VersionInfo()
+                {
+                    Major = backFillViewModel.BackFillBuild.Major,
+                    Minor = backFillViewModel.BackFillBuild.Minor,
+                    Build = backFillViewModel.BackFillBuild.Build,
+                    Revision = backFillViewModel.BackFillBuild.Revision,
+                    FriendlyNameLong = backFillViewModel.FriendlyNameLong,
+                    FriendlyNameShort = backFillViewModel.FriendlyNameShort,
+                    ReleaseDate = backFillViewModel.ReleaseDate.Value,
+                    IsSupported = backFillViewModel.IsSupported,
+                    ReferenceLinks = new List<string>() { backFillViewModel.ReferenceLink }
+                };
 
-        //}
+                if (dataAccess.AddVersionInfo(newVersionInfo))
+                {
+                    // this is the success condition
+                    //
+                    // remove the back fill build
+                    //
+                    if (dataAccess.DeleteBackFillBuild(backFillViewModel.BackFillBuild))
+                    {
+                        // this is our final and end result success condition
+                        //
+                        // at this point we want to show success and then next 
+                        // random build to fill
+                        //
+                        backFillViewModel = new BackFillViewModel();
+
+                        backFillViewModel.BackFillBuild = (dataAccess).GetRandomBackFillBuild();
+                        backFillViewModel.BackFillCount = (dataAccess).GetBackFillBuildsCount();
+                        backFillViewModel.DisplayMessage = DisplayMessage.Success;
+                        backFillViewModel.IsSupported = true;
+
+                        return View(backFillViewModel);
+                    }
+                    else
+                    {
+                        // this is an error condition
+                        // if we can't delete the back fill version then we need to keep it in 
+                        // the build and then attempt to delete the version as we don't want to 
+                        // have a vicious cycle of attempting to continue trying to fill an 
+                        // existing build
+                        //
+                        dataAccess.DeleteVersionInfo(newVersionInfo);
+
+                        // now we need to report the error *without* keeping the data
+                        //
+                        backFillViewModel = new BackFillViewModel();
+                        backFillViewModel.DisplayMessage = DisplayMessage.Error;
+
+                        return View(backFillViewModel);
+                    }
+                }
+                else
+                {
+                    // something went wrong here so report the error
+                    //
+                    backFillViewModel = new BackFillViewModel();
+                    backFillViewModel.DisplayMessage = DisplayMessage.Error;
+
+                    return View(backFillViewModel);
+                }
+            }
+            else
+            {
+                // data isn't valid so display an error with existing data 
+                // so the user can reconnect
+                //
+                backFillViewModel.DisplayMessage = DisplayMessage.Error;
+                return View(backFillViewModel);
+            }
+        }
     }
 }

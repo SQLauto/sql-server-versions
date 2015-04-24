@@ -87,6 +87,7 @@
     <Build Include="Tables\BuildBackFill.sql" />
     <Build Include="Procedures\BuildGetAllBackFill.sql" />
     <Build Include="Procedures\BuildGetRandomBackFill.sql" />
+    <Build Include="Procedures\BuildRemoveBackFill.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlServerVersions.Database.publish.xml" />

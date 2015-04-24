@@ -1,5 +1,7 @@
 ﻿@model SqlServerVersions.ViewModels.BackFillViewModel
 
+@using SqlServerVersions.ViewModels
+
 @{
     ViewBag.Title = "BackFill";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,6 +19,38 @@
                     </td>
                 </tr>              
             </table>
+
+            @if (Model.DisplayMessage == DisplayMessage.Error && Model.BackFillBuild != null)
+            {
+                <table>
+                    <tr>
+                        <td class="failure-message">
+                            bad data! please correct then re-submit
+                        </td>
+                    </tr>
+                </table>
+            }
+            else if (Model.DisplayMessage == DisplayMessage.Error && Model.BackFillBuild == null)
+            {
+                <table>
+                    <tr>
+                        <td class="failure-message">
+                            something went wrong!!
+                        </td>
+                    </tr>
+                </table>
+            }
+            else if (Model.DisplayMessage == DisplayMessage.Success)
+            {
+                <table>
+                    <tr>
+                        <td class="success-message">
+                            thanks for adding the data!!!
+                        </td>
+                    </tr>
+                </table>
+            }
+
             @if (Model.BackFillBuild == null && Model.BackFillCount == 0)
             {
                 <table>
@@ -30,6 +64,10 @@
             }
             else
             {
+                @Html.HiddenFor(m => m.BackFillBuild.Major)
+                @Html.HiddenFor(m => m.BackFillBuild.Minor)
+                @Html.HiddenFor(m => m.BackFillBuild.Build)
+                @Html.HiddenFor(m => m.BackFillBuild.Revision)
                 <table>
                     <tr>
                         <td width="50%">
@@ -82,6 +120,7 @@
                                 <tr>
                                     <td colspan="2">
                                         <span id="input-supported" class="backfill-supported backfill-supported-input">supported</span>
+                                        @Html.HiddenFor(m => m.IsSupported, new { id = "hidden-supported" })
                                     </td>
                                 </tr>
                                 <tr>

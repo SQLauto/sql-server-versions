@@ -16,5 +16,7 @@ namespace SqlServerVersions.ViewModels
         public string FriendlyNameShort { get; set; }
         public bool IsSupported { get; set; }
         public string ReferenceLink { get; set; }
+
+        public DisplayMessage DisplayMessage { get; set; }
     }
 }

@@ -262,3 +262,13 @@
 .backfill input[type="submit"] {
     color: darkslategray;
 }
+
+.backfill .success-message {
+    color: green;
+    font-style: italic;
+}
+
+.backfill .failure-message {
+    color: red;
+    font-style: italic;
+}

@@ -62,6 +62,7 @@ $(document).ready(function () {
     $("#input-supported").click(function () {
         if ($(this).hasClass("backfill-supported")) {
             $(this).text("unsupported");
+            $("#hidden-supported").val("False");
             $(this).removeClass("backfill-supported").addClass("backfill-unsupported");
 
             $("#repeat-issupported").text("Unsupported");
@@ -69,6 +70,7 @@ $(document).ready(function () {
         }
         else {
             $(this).text("supported");
+            $("#hidden-supported").val("True");
             $(this).removeClass("backfill-unsupported").addClass("backfill-supported");
 
             $("#repeat-issupported").text("Supported");

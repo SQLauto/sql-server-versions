@@ -172,6 +172,7 @@
     <Compile Include="Models\VersionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BackFillViewModel.cs" />
+    <Compile Include="ViewModels\DisplayMessage.cs" />
     <Compile Include="ViewModels\RecentReleaseViewModel.cs" />
     <Compile Include="ViewModels\SupportabilityBoundaries.cs" />
     <Compile Include="ViewModels\SupportabilityViewModel.cs" />
