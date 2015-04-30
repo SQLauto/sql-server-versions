@@ -110,7 +110,7 @@ namespace SqlServerVersions.Controllers
             {
                 // if it already exists then attempt to modify it
                 //
-                if (_dataAccess.ModifyVersionInfo(major, minor, build, revision, modifiedVersionInfo))
+                if (_dataAccess.ModifyVersionInfo(major, minor, build, modifiedVersionInfo))
                     Response = Request.CreateResponse<VersionInfo>(HttpStatusCode.OK, modifiedVersionInfo);
                 else
                     Response = Request.CreateResponse<VersionInfo>(HttpStatusCode.BadRequest, modifiedVersionInfo);
