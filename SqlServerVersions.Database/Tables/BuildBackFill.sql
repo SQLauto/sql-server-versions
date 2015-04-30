@@ -4,5 +4,5 @@
     [Minor] int not null,
     [Build] int not null,
     [Revision] int not null
-    constraint UK_VersionBackFill_MajorMinorBuildRevision unique CLUSTERED (Major, Minor, Build, Revision)
+    constraint UK_VersionBackFill_MajorMinorBuild unique CLUSTERED (Major, Minor, Build)
 )

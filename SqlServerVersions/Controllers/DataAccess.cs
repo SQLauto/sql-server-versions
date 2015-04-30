@@ -828,10 +828,6 @@ namespace SqlServerVersions.Controllers
                     {
                         Value = versionBuild.Build
                     });
-                sqlCmd.Parameters.Add(new SqlParameter("@Revision", SqlDbType.Int)
-                    {
-                        Value = versionBuild.Revision
-                    });
 
                 try
                 {
