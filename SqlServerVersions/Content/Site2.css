@@ -288,3 +288,14 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+.backfill .submit-preview {
+    border-width: medium;
+    border-color: gray;
+    border-style: solid;
+    padding: 30px;
+}
+
+.backfill .main-view {
+    padding-right: 10px;
+}

@@ -67,7 +67,7 @@
                 @Html.HiddenFor(m => m.BackFillBuild.Major)
                 @Html.HiddenFor(m => m.BackFillBuild.Minor)
                 @Html.HiddenFor(m => m.BackFillBuild.Build)
-                <table>
+                <table class="main-view">
                     <tr>
                         <td width="50%">
                             <table>
@@ -152,7 +152,7 @@
                             </table>
                         </td>
                         <td width="50%">
-                            <table>
+                            <table class="submit-preview">
                                 <tr>
                                     <td>
                                         @string.Format("{0}.{1}.{2}.", Model.BackFillBuild.Major, Model.BackFillBuild.Minor, Model.BackFillBuild.Build)<span id="repeat-revision"></span>
