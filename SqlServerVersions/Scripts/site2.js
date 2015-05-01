@@ -31,6 +31,16 @@ function enableSubmitIfNecessary() {
     }
 }
 
+function clearInputIfSuccessfulAdd() {
+    if ($("#data-add-successful").length) {
+        $("#input-friendlynamelong").val("");
+        $("#input-friendlynameshort").val("");
+        $("#input-releasedate").val("");
+        $("#input-referencelink").val("");
+        $("#input-revision").val("0");
+    }
+}
+
 $(document).ready(function () {
     $("#input-friendlynamelong").keyup(function () {
         $("#repeat-friendlynamelong").text($(this).val());
@@ -119,4 +129,9 @@ $(document).ready(function () {
     // set the repeat-revision span to default to the revision
     //
     $("#repeat-revision").text($("#input-revision").val());
+
+    // ensure that if data was added successfully that we don't 
+    // retain values on postback
+    //
+    clearInputIfSuccessfulAdd();
 });
