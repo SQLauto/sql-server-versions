@@ -239,6 +239,16 @@
     visibility: hidden;
 }
 
+.revision-error {
+    padding-top: 0px;
+    font-size: x-small;
+    font-style: italic;
+    text-align: left;
+    padding-left: 10px;
+    color: red;
+    visibility: hidden;
+}
+
 .backfill-supported {
     color: green;
 }

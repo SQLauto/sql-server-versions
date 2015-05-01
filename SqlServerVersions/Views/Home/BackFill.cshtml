@@ -87,7 +87,8 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="example">
-                                        is this revision number even correct? (it may not be!)
+                                        is this revision number even correct? (it may not be!)<br />
+                                        <span class="revision-error">incorrect revision number</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -155,7 +156,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        @string.Format("{0}.{1}.{2}.{3}", Model.BackFillBuild.Major, Model.BackFillBuild.Minor, Model.BackFillBuild.Build, Model.BackFillBuild.Revision)
+                                        @string.Format("{0}.{1}.{2}.", Model.BackFillBuild.Major, Model.BackFillBuild.Minor, Model.BackFillBuild.Build)<span id="repeat-revision"></span>
                                     </td>
                                 </tr>
                                 <tr>
