@@ -37,8 +37,32 @@
         @if (Model.FoundVersion == null)
         {
             <p class="no-results">
-                sorry, I couldn't find that :-(
+                sorry, I couldn't find that :-(<br /><br />
+                if this is a real version, <b>can you add it?</b> (do it for the community!)
             </p>
+            <table>
+                <tr>
+                    <td colspan="2">
+                        @string.Format("{0}.{1}.{2}.{3}", Model.Major, Model.Minor, Model.Build, Model.Revision)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        long name:
+                    </td>
+                    <td>
+                        ...input...
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        short name:
+                    </td>
+                    <td>
+                        ...input...
+                    </td>
+                </tr>
+            </table>
         }
         else
         {
