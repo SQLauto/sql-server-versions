@@ -3,11 +3,17 @@
     return dateRegex.test(dateInput);
 }
 
+function isRevisionValid(revisionInput) {
+    var intRegex = new RegExp(/^\d+$/);
+    return intRegex.test(revisionInput);
+}
+
 function isAllInputThereAndValid() {
     if (
         $("#input-friendlynamelong").val().trim() &&
         $("#input-friendlynameshort").val().trim() &&
         isDateValid($("#input-releasedate").val()) &&
+        isRevisionValid($("#input-revision").val()) &&
         $("#input-referencelink").val().trim()) {
         return true;
     }
@@ -22,6 +28,16 @@ function enableSubmitIfNecessary() {
     }
     else {
         $("#add-new-build").attr("disabled", "disabled");
+    }
+}
+
+function clearInputIfSuccessfulAdd() {
+    if ($("#data-add-successful").length) {
+        $("#input-friendlynamelong").val("");
+        $("#input-friendlynameshort").val("");
+        $("#input-releasedate").val("");
+        $("#input-referencelink").val("");
+        $("#input-revision").val("0");
     }
 }
 
@@ -57,6 +73,8 @@ $(document).ready(function () {
                 $(".date-error").css("visibility", "visible");
             }
         }
+
+        enableSubmitIfNecessary();
     });
 
     $("#input-supported").click(function () {
@@ -82,6 +100,38 @@ $(document).ready(function () {
         var inputRefLink = $(this).val();
         $("#repeat-referencelink").attr("href", inputRefLink);
         $("#repeat-referencelink").text(inputRefLink);
+
         enableSubmitIfNecessary();
     });
+
+    $("#input-revision").keyup(function () {
+        var revisionInput = $(this).val();
+        revisionInput = revisionInput.trim();
+
+        if (!revisionInput) {
+            $("#repeat-revision").text("");
+            $(".revision-error").css("visibility", "hidden");
+        }
+        else {
+            if (isRevisionValid(revisionInput)) {
+                $(".revision-error").css("visibility", "hidden");
+                $("#repeat-revision").text(revisionInput);
+            }
+            else {
+                $("#repeat-revision").text("");
+                $(".revision-error").css("visibility", "visible");
+            }
+        }
+
+        enableSubmitIfNecessary();
+    });
+
+    // set the repeat-revision span to default to the revision
+    //
+    $("#repeat-revision").text($("#input-revision").val());
+
+    // ensure that if data was added successfully that we don't 
+    // retain values on postback
+    //
+    clearInputIfSuccessfulAdd();
 });

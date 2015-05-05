@@ -11,5 +11,5 @@
 	FriendlyNameLong varchar(128) not null,
 	IsSupported bit not null,
 	ReleaseDate date null,
-	constraint UK_Version_MajorMinorBuildRevision unique (Major, Minor, Build, Revision)
+	constraint UK_Version_MajorMinorBuild unique (Major, Minor, Build)
 )

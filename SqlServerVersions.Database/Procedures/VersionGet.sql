@@ -1,8 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[VersionGet]
 	@Major int = null,
 	@Minor int = null,
-	@Build int = null,
-	@Revision int = null
+	@Build int = null
 AS
 	set nocount on;
 
@@ -29,9 +28,5 @@ AS
 	(
 		@Build is null 
 		or Build = @Build
-	) and
-	(
-		@Revision is null
-		or Revision = @Revision
 	);
 go

@@ -2,7 +2,6 @@
 	@MajorOld int,
 	@MinorOld int,
 	@BuildOld int,
-	@RevisionOld int,
 	@Major int,
 	@Minor int,
 	@Build int,
@@ -25,8 +24,7 @@ AS
 			ReleaseDate = @ReleaseDate
 		where Major = @MajorOld
 		and Minor = @MinorOld
-		and Build = @BuildOld
-		and Revision = @RevisionOld;
+		and Build = @BuildOld;
 
 		return 0;
 	end try

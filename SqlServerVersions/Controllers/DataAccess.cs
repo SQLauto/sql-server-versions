@@ -54,12 +54,6 @@ namespace SqlServerVersions.Controllers
                             Value = build
                         });
 
-                if (revision >= 0)
-                    SqlCmd.Parameters.Add(new SqlParameter("@Revision", SqlDbType.Int)
-                        {
-                            Value = revision
-                        });
-
                 try
                 {
                     sda.Fill(Output);
@@ -113,10 +107,6 @@ namespace SqlServerVersions.Controllers
                 SqlCmd.Parameters.Add(new SqlParameter("@Build", SqlDbType.Int)
                     {
                         Value = build
-                    });
-                SqlCmd.Parameters.Add(new SqlParameter("@Revision", SqlDbType.Int)
-                    {
-                        Value = revision
                     });
 
                 try
@@ -571,10 +561,6 @@ namespace SqlServerVersions.Controllers
                     {
                         Value = newVersionInfo.Build
                     });
-                SqlCmd.Parameters.Add(new SqlParameter("@Revision", SqlDbType.Int)
-                    {
-                        Value = newVersionInfo.Revision
-                    });
                 SqlCmd.Parameters.Add(new SqlParameter("@NewReferenceLink", SqlDbType.VarChar, 2000));
 
                 // with the iterative nature of the reference links, we will 
@@ -623,7 +609,7 @@ namespace SqlServerVersions.Controllers
             }
         }
 
-        public bool ModifyVersionInfo(int major, int minor, int build, int revision, VersionInfo modifiedVersionInfo)
+        public bool ModifyVersionInfo(int major, int minor, int build, VersionInfo modifiedVersionInfo)
         {
             using (SqlConnection DatabaseConnection = new SqlConnection(_connectionString))
             using (SqlCommand SqlCmd = new SqlCommand())
@@ -643,10 +629,6 @@ namespace SqlServerVersions.Controllers
                 SqlCmd.Parameters.Add(new SqlParameter("@BuildOld", SqlDbType.Int)
                     {
                         Value = build
-                    });
-                SqlCmd.Parameters.Add(new SqlParameter("@RevisionOld", SqlDbType.Int)
-                    {
-                        Value = revision
                     });
 
                 SqlCmd.Parameters.Add(new SqlParameter("@Major", SqlDbType.Int)
@@ -732,10 +714,6 @@ namespace SqlServerVersions.Controllers
                 SqlCmd.Parameters.Add(new SqlParameter("@Build", SqlDbType.Int)
                     {
                         Value = versionInfo.Build
-                    });
-                SqlCmd.Parameters.Add(new SqlParameter("@Revision", SqlDbType.Int)
-                    {
-                        Value = versionInfo.Revision
                     });
 
                 try
@@ -849,10 +827,6 @@ namespace SqlServerVersions.Controllers
                 sqlCmd.Parameters.Add(new SqlParameter("@Build", SqlDbType.Int)
                     {
                         Value = versionBuild.Build
-                    });
-                sqlCmd.Parameters.Add(new SqlParameter("@Revision", SqlDbType.Int)
-                    {
-                        Value = versionBuild.Revision
                     });
 
                 try

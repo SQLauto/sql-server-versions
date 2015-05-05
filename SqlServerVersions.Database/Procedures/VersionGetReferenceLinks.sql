@@ -1,8 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[VersionGetReferenceLinks]
 	@Major int,
 	@Minor int,
-	@Build int,
-	@Revision int
+	@Build int
 AS
 	set nocount on;
 
@@ -13,6 +12,5 @@ AS
 	on vrl.VersionId = v.Id
 	where v.Major = @Major
 	and v.Minor = @Minor
-	and v.Build = @Build
-	and v.Revision = @Revision;
+	and v.Build = @Build;
 go

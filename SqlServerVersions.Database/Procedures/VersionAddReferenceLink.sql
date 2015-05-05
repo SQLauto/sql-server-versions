@@ -2,7 +2,6 @@
 	@Major int,
 	@Minor int,
 	@Build int,
-	@Revision int,
 	@NewReferenceLink varchar(2000)
 AS
 	set nocount on;
@@ -18,6 +17,5 @@ AS
 	from dbo.Version
 	where Major = @Major
 	and Minor = @Minor
-	and Build = @Build
-	and Revision = @Revision;
+	and Build = @Build;
 go

@@ -44,7 +44,7 @@
             {
                 <table>
                     <tr>
-                        <td class="success-message">
+                        <td class="success-message" id="data-add-successful">
                             thanks for adding the data!!!
                         </td>
                     </tr>
@@ -67,14 +67,27 @@
                 @Html.HiddenFor(m => m.BackFillBuild.Major)
                 @Html.HiddenFor(m => m.BackFillBuild.Minor)
                 @Html.HiddenFor(m => m.BackFillBuild.Build)
-                @Html.HiddenFor(m => m.BackFillBuild.Revision)
-                <table>
+                <table class="main-view">
                     <tr>
                         <td width="50%">
                             <table>
                                 <tr>
                                     <td colspan="2" class="question-fill-version">
                                         can you fill in version info for <br /><b>@string.Format("{0}.{1}.{2}.{3}", Model.BackFillBuild.Major, Model.BackFillBuild.Minor, Model.BackFillBuild.Build, Model.BackFillBuild.Revision)</b>?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="field-label">
+                                        revision
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.BackFillBuild.Revision, new { id = "input-revision" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="example">
+                                        is this revision number even correct? (it may not be!)<br />
+                                        <span class="revision-error">incorrect revision number</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -139,10 +152,10 @@
                             </table>
                         </td>
                         <td width="50%">
-                            <table>
+                            <table class="submit-preview">
                                 <tr>
                                     <td>
-                                        @string.Format("{0}.{1}.{2}.{3}", Model.BackFillBuild.Major, Model.BackFillBuild.Minor, Model.BackFillBuild.Build, Model.BackFillBuild.Revision)
+                                        @string.Format("{0}.{1}.{2}.", Model.BackFillBuild.Major, Model.BackFillBuild.Minor, Model.BackFillBuild.Build)<span id="repeat-revision"></span>
                                     </td>
                                 </tr>
                                 <tr>
