@@ -43,23 +43,47 @@
             <table>
                 <tr>
                     <td colspan="2">
-                        @string.Format("{0}.{1}.{2}.{3}", Model.Major, Model.Minor, Model.Build, Model.Revision)
+                        @string.Format("{0}.{1}.{2}.{3}", Model.NewVersion.Major, Model.NewVersion.Minor, Model.NewVersion.Build, Model.NewVersion.Revision)
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="field-label">
                         long name:
                     </td>
                     <td>
-                        ...input...
+                        @Html.TextBoxFor(m => m.NewVersion.FriendlyNameLong, new { id = "input-friendlynamelong" })
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="2" class="example">
+                        i.e. SQL Server 2012 Service Pack 1 Cumulative Update 3
+                    </td>
+                </tr>
+                <tr>
+                    <td class="field-label">
                         short name:
                     </td>
                     <td>
-                        ...input...
+                        @Html.TextBoxFor(m => m.NewVersion.FriendlyNameShort, new { id = "input-friendlynameshort" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="example">
+                        i.e. SQL 2012 SP1 CU3
+                    </td>
+                </tr>
+                <tr>
+                    <td class="field-label">
+                        release date
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.NewVersion.ReleaseDate, new { id = "input-releasedate" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="example">
+                        mm/dd/yyyy<br />
+                        <span class="date-error">incorrect date format</span>
                     </td>
                 </tr>
             </table>
