@@ -203,7 +203,7 @@
     padding-top: 15px;
 }
 
-.backfill .example {
+.example {
     padding-top: 0px;
     font-size: x-small;
     font-style: italic;
@@ -212,7 +212,7 @@
     color: #999999;
 }
 
-.backfill .example-supported {
+.example-supported {
     padding-top: 0px;
     font-size: x-small;
     font-style: italic;
@@ -220,11 +220,11 @@
     color: #999999;
 }
 
-.backfill .question-fill-version {
+.question-fill-version {
     font-size: smaller;
 }
 
-.backfill .field-label {
+.field-label {
     text-align: right;
     font-size: small;
 }
@@ -298,4 +298,8 @@
 
 .backfill .main-view {
     padding-right: 10px;
+}
+
+.new-version input {
+    font-family: 'Segoe UI';
 }
