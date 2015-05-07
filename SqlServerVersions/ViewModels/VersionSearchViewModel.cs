@@ -15,5 +15,7 @@ namespace SqlServerVersions.ViewModels
 
         public bool IsSearchedFor { get; set; }
         public VersionInfo FoundVersion { get; set; }
+
+        public VersionInfo NewVersion { get; set; }
     }
 }

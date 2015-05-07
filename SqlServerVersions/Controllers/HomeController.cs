@@ -54,6 +54,16 @@ namespace SqlServerVersions.Controllers
             VersionSearchViewModel versionSearchViewModel = new VersionSearchViewModel();
             
             versionSearchViewModel.FoundVersion = (new DataAccess()).GetVersionInfo(major, minor, build, revision);
+
+            if (versionSearchViewModel.FoundVersion == null)
+                versionSearchViewModel.NewVersion = new VersionInfo()
+                {
+                    Major = major,
+                    Minor = minor,
+                    Build = build,
+                    Revision = revision
+                };
+
             versionSearchViewModel.IsSearchedFor = true;
 
             return View("Index", versionSearchViewModel);
