@@ -17,5 +17,6 @@ namespace SqlServerVersions.ViewModels
         public VersionInfo FoundVersion { get; set; }
 
         public VersionInfo NewVersion { get; set; }
+        public string ReferenceLink { get; set; }
     }
 }

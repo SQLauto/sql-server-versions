@@ -86,6 +86,30 @@
                         <span class="date-error">incorrect date format</span>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <span id="input-supported" class="backfill-supported backfill-supported-input">supported</span>
+                        @Html.HiddenFor(m => m.NewVersion.IsSupported, new { id = "hidden-supported" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="example-supported">
+                        click to toggle
+                    </td>
+                </tr>
+                <tr>
+                    <td class="field-label">
+                        reference link
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ReferenceLink, new { id = "input-referencelink" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="add" id="add-new-build" disabled="disabled" />
+                    </td>
+                </tr>
             </table>
         }
         else
