@@ -39,7 +39,9 @@ namespace SqlServerVersions.Controllers
                     {
                         // at this point we need to actually add the new version
                         //
-                        if (new DataAccess().AddVersionInfo(new VersionInfo()
+                        DataAccess dataAccess = new DataAccess();
+
+                        if (dataAccess.AddVersionInfo(new VersionInfo()
                         {
                             Major = versionSearchViewModel.Major,
                             Minor = versionSearchViewModel.Minor,
@@ -49,7 +51,20 @@ namespace SqlServerVersions.Controllers
                             FriendlyNameLong = versionSearchViewModel.NewFriendlyNameLong,
                             FriendlyNameShort = versionSearchViewModel.NewFriendlyNameShort,
                             ReferenceLinks = new List<string>() { versionSearchViewModel.NewReferenceLink }
-                        }))
+                        })) { 
+                            // if the added version info is also a back fill build
+                            // and if it was successfully added then we need to remove 
+                            // this build from the back fill list
+                            //
+                            if (dataAccess.IsBackFillBuild(versionSearchViewModel.Major, versionSearchViewModel.Minor, versionSearchViewModel.Build))
+                                dataAccess.DeleteBackFillBuild(new VersionBuild()
+                                {
+                                    Major = versionSearchViewModel.Major,
+                                    Minor = versionSearchViewModel.Minor,
+                                    Build = versionSearchViewModel.Build,
+                                    Revision = versionSearchViewModel.Revision
+                                });
+
                             return RedirectToAction(
                                 "VersionSearch",
                                 new
@@ -59,6 +74,7 @@ namespace SqlServerVersions.Controllers
                                     build = versionSearchViewModel.Build,
                                     revision = versionSearchViewModel.Revision
                                 });
+                        }
                     }
                     else
                     {
