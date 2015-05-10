@@ -16,7 +16,10 @@ namespace SqlServerVersions.ViewModels
         public bool IsSearchedFor { get; set; }
         public VersionInfo FoundVersion { get; set; }
 
-        public VersionInfo NewVersion { get; set; }
-        public string ReferenceLink { get; set; }
+        public string NewFriendlyNameLong { get; set; }
+        public string NewFriendlyNameShort { get; set; }
+        public DateTime? NewReleaseDate { get; set; }
+        public string NewReferenceLink { get; set; }
+        public bool NewIsSupported { get; set; }
     }
 }
