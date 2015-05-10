@@ -843,5 +843,59 @@ namespace SqlServerVersions.Controllers
                 return true;
             }
         }
+
+        public VersionBuild GetBackFillBuild(int major, int minor, int build)
+        {
+            using (SqlConnection databaseConnection = new SqlConnection(_connectionString))
+            using (SqlCommand sqlCmd = new SqlCommand())
+            using (SqlDataAdapter sda = new SqlDataAdapter(sqlCmd))
+            {
+                sqlCmd.Connection = databaseConnection;
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.CommandText = "dbo.BuildGetBackFillBuild";
+
+                sqlCmd.Parameters.Add(new SqlParameter("@Major", SqlDbType.Int)
+                    {
+                        Value = major
+                    });
+
+                sqlCmd.Parameters.Add(new SqlParameter("@Minor", SqlDbType.Int)
+                    {
+                        Value = minor
+                    });
+
+                sqlCmd.Parameters.Add(new SqlParameter("@Build", SqlDbType.Int)
+                    {
+                        Value = build
+                    });
+
+                DataTable output = new DataTable();
+
+                try
+                {
+                    sda.Fill(output);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogMessage(new LogEntry() { Message = ex.Message, StackTrace = ex.StackTrace });
+                    return null;
+                }
+
+                if (output.Rows.Count == 0)
+                    return null;
+                else
+                    return new VersionBuild()
+                    {
+                        Major = Convert.ToInt32(output.Rows[0]["Major"]),
+                        Minor = Convert.ToInt32(output.Rows[0]["Minor"]),
+                        Build = Convert.ToInt32(output.Rows[0]["Build"]),
+                        Revision = Convert.ToInt32(output.Rows[0]["Revision"])
+                    };
+            }
+        }
+        public bool IsBackFillBuild(int major, int minor, int build)
+        {
+            return GetBackFillBuild(major, minor, build) != null;
+        }
     }
 }
