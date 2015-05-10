@@ -142,6 +142,11 @@ namespace SqlServerVersions.Controllers
             if (AllVersionInfo.Count() == 0)
                 return null;
 
+            // track this version as being found because at this point we must
+            // have a match
+            //
+            AddVersionSearchTracking(major, minor, build);
+
             return AllVersionInfo.First();
         }
         public IEnumerable<VersionInfo> GetTopRecentReleaseVersionInfo(int topCount)
@@ -896,6 +901,40 @@ namespace SqlServerVersions.Controllers
         public bool IsBackFillBuild(int major, int minor, int build)
         {
             return GetBackFillBuild(major, minor, build) != null;
+        }
+
+        private void AddVersionSearchTracking(int major, int minor, int build)
+        {
+            using (SqlConnection databaseConnection = new SqlConnection(_connectionString))
+            using (SqlCommand sqlCmd = new SqlCommand())
+            {
+                sqlCmd.Connection = databaseConnection;
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.CommandText = "dbo.VersionAddSearchTracking";
+
+                sqlCmd.Parameters.Add(new SqlParameter("@Major", SqlDbType.Int)
+                    {
+                        Value = major
+                    });
+                sqlCmd.Parameters.Add(new SqlParameter("@Minor", SqlDbType.Int)
+                    {
+                        Value = minor
+                    });
+                sqlCmd.Parameters.Add(new SqlParameter("@Build", SqlDbType.Int)
+                    {
+                        Value = build
+                    });
+
+                try
+                {
+                    databaseConnection.Open();
+                    sqlCmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogMessage(new LogEntry() { Message = ex.Message, StackTrace = ex.StackTrace });
+                }
+            }
         }
     }
 }

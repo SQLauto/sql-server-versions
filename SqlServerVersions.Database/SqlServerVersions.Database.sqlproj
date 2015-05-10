@@ -89,6 +89,9 @@
     <Build Include="Procedures\BuildGetRandomBackFill.sql" />
     <Build Include="Procedures\BuildRemoveBackFill.sql" />
     <Build Include="Procedures\BuildGetBackFillBuild.sql" />
+    <Build Include="Tables\VersionSearchTracking.sql" />
+    <Build Include="Procedures\VersionGetSearchTracking.sql" />
+    <Build Include="Procedures\VersionAddSearchTracking.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlServerVersions.Database.publish.xml" />

@@ -6,4 +6,4 @@
 )
 GO
 
-CREATE INDEX [IX_VersionSearchTracking_VersionId] ON [dbo].[VersionSearchTracking] ([VersionId])
+CREATE CLUSTERED INDEX [IX_VersionSearchTracking_VersionId] ON [dbo].[VersionSearchTracking] ([VersionId])

@@ -7,6 +7,6 @@ AS
     select Id
     from dbo.Version
     where Major = @major
-    and Minor = @minor
+    and Minor = @Minor
     and Build = @Build;
 go
