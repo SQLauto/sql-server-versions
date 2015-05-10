@@ -29,18 +29,43 @@ namespace SqlServerVersions.Controllers
         }
 
         [HttpPost]
-        public ActionResult VersionSearch(VersionInfo versionInfo)
+        public ActionResult VersionSearch(VersionSearchViewModel versionSearchViewModel)
         {
             if (ModelState.IsValid) 
             {
+                if (versionSearchViewModel.IsNewVersion)
+                {
+                    if (IsNewVersionDataComplete(versionSearchViewModel))
+                    {
+                        // at this point we need to actually add the new version
+                        //
+                        new DataAccess().AddVersionInfo(new VersionInfo()
+                        {
+                            Major = versionSearchViewModel.Major,
+                            Minor = versionSearchViewModel.Minor,
+                            Build = versionSearchViewModel.Build,
+                            Revision = versionSearchViewModel.Revision,
+                            ReleaseDate = versionSearchViewModel.NewReleaseDate.Value,
+                            FriendlyNameLong = versionSearchViewModel.NewFriendlyNameLong,
+                            FriendlyNameShort = versionSearchViewModel.NewFriendlyNameShort,
+                            ReferenceLinks = new List<string>() { versionSearchViewModel.NewReferenceLink }
+                        });
+                    }
+                    else
+                    {
+                        // this is an error condition, the data isn't all there
+                        //
+                    }                        
+                }
+
                 return RedirectToAction(
                     "VersionSearch",
                     new
                     {
-                        major = versionInfo.Major,
-                        minor = versionInfo.Minor,
-                        build = versionInfo.Build,
-                        revision = versionInfo.Revision
+                        major = versionSearchViewModel.Major,
+                        minor = versionSearchViewModel.Minor,
+                        build = versionSearchViewModel.Build,
+                        revision = versionSearchViewModel.Revision
                     });
             }
             else
@@ -60,9 +85,22 @@ namespace SqlServerVersions.Controllers
             versionSearchViewModel.Build = build;
             versionSearchViewModel.Revision = revision;
 
+            if (versionSearchViewModel.FoundVersion == null)
+                versionSearchViewModel.IsNewVersion = true;
+            else
+                versionSearchViewModel.IsNewVersion = false;
+
             versionSearchViewModel.IsSearchedFor = true;
 
             return View("Index", versionSearchViewModel);
+        }
+        private bool IsNewVersionDataComplete(VersionSearchViewModel versionSearchViewModel)
+        {
+            return 
+                !string.IsNullOrWhiteSpace(versionSearchViewModel.NewFriendlyNameLong) &&
+                !string.IsNullOrWhiteSpace(versionSearchViewModel.NewFriendlyNameShort) &&
+                versionSearchViewModel.NewReleaseDate != null &&
+                !string.IsNullOrWhiteSpace(versionSearchViewModel.NewReferenceLink);
         }
 
         [HttpGet]
