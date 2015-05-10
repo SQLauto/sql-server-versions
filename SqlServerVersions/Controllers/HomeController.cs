@@ -39,7 +39,7 @@ namespace SqlServerVersions.Controllers
                     {
                         // at this point we need to actually add the new version
                         //
-                        new DataAccess().AddVersionInfo(new VersionInfo()
+                        if (new DataAccess().AddVersionInfo(new VersionInfo()
                         {
                             Major = versionSearchViewModel.Major,
                             Minor = versionSearchViewModel.Minor,
@@ -49,7 +49,16 @@ namespace SqlServerVersions.Controllers
                             FriendlyNameLong = versionSearchViewModel.NewFriendlyNameLong,
                             FriendlyNameShort = versionSearchViewModel.NewFriendlyNameShort,
                             ReferenceLinks = new List<string>() { versionSearchViewModel.NewReferenceLink }
-                        });
+                        }))
+                            return RedirectToAction(
+                                "VersionSearch",
+                                new
+                                {
+                                    major = versionSearchViewModel.Major,
+                                    minor = versionSearchViewModel.Minor,
+                                    build = versionSearchViewModel.Build,
+                                    revision = versionSearchViewModel.Revision
+                                });
                     }
                     else
                     {
@@ -86,7 +95,12 @@ namespace SqlServerVersions.Controllers
             versionSearchViewModel.Revision = revision;
 
             if (versionSearchViewModel.FoundVersion == null)
+            {
                 versionSearchViewModel.IsNewVersion = true;
+                // we need to initially seed supported to true
+                //
+                versionSearchViewModel.NewIsSupported = true;
+            }
             else
                 versionSearchViewModel.IsNewVersion = false;
 
