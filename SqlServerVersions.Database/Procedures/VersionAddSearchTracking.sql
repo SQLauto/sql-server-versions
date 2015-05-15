@@ -6,7 +6,7 @@ AS
     insert into dbo.VersionSearchTracking (VersionId)
     select Id
     from dbo.Version
-    where Major = @major
+    where Major = @Major
     and Minor = @Minor
     and Build = @Build;
 go
