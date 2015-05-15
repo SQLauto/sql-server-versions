@@ -97,13 +97,13 @@ namespace SqlServerVersions.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage PutModifiedVersion(int major, int minor, int build, int revision, VersionInfo modifiedVersionInfo)
+        public HttpResponseMessage PutModifiedVersion(int major, int minor, int build, VersionInfo modifiedVersionInfo)
         {
             HttpResponseMessage Response;
 
             // check to make sure the version info already exists
             //
-            if (_dataAccess.GetVersionInfo(major, minor, build, revision) == null)
+            if (_dataAccess.GetVersionInfo(major, minor, build, 0) == null)
             {
                 Response = new HttpResponseMessage(HttpStatusCode.NotFound);
             }
