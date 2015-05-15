@@ -43,9 +43,9 @@ namespace SqlServerVersions.Controllers
             return PostNewVersion(newVersionInfo);
         }
         [HttpPut]
-        public HttpResponseMessage SearchVersion(int major, int minor, int build, int revision, VersionInfo modifiedVersionInfo)
+        public HttpResponseMessage SearchVersion(int major, int minor, int build, VersionInfo modifiedVersionInfo)
         {
-            return PutModifiedVersion(major, minor, build, revision, modifiedVersionInfo);
+            return PutModifiedVersion(major, minor, build, modifiedVersionInfo);
         }
 
         [HttpGet]
@@ -96,8 +96,7 @@ namespace SqlServerVersions.Controllers
             return Response;
         }
 
-        [HttpPut]
-        public HttpResponseMessage PutModifiedVersion(int major, int minor, int build, VersionInfo modifiedVersionInfo)
+        private HttpResponseMessage PutModifiedVersion(int major, int minor, int build, VersionInfo modifiedVersionInfo)
         {
             HttpResponseMessage Response;
 
