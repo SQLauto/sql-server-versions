@@ -96,7 +96,8 @@ namespace SqlServerVersions.Controllers
             return Response;
         }
 
-        private HttpResponseMessage PutModifiedVersion(int major, int minor, int build, int revision, VersionInfo modifiedVersionInfo)
+        [HttpPut]
+        public HttpResponseMessage PutModifiedVersion(int major, int minor, int build, int revision, VersionInfo modifiedVersionInfo)
         {
             HttpResponseMessage Response;
 
