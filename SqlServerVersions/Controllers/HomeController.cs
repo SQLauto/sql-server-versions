@@ -50,6 +50,7 @@ namespace SqlServerVersions.Controllers
                             ReleaseDate = versionSearchViewModel.NewReleaseDate.Value,
                             FriendlyNameLong = versionSearchViewModel.NewFriendlyNameLong,
                             FriendlyNameShort = versionSearchViewModel.NewFriendlyNameShort,
+                            IsSupported = versionSearchViewModel.NewIsSupported,
                             ReferenceLinks = new List<string>() { versionSearchViewModel.NewReferenceLink }
                         })) { 
                             // if the added version info is also a back fill build
