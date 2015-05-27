@@ -10,33 +10,26 @@
 AS
 	set nocount on;
 
-	begin try
-		insert into dbo.Version
-		(
-			Major,
-			Minor,
-			Build,
-			Revision,
-			FriendlyNameShort,
-			FriendlyNameLong,
-			IsSupported,
-			ReleaseDate
-		)
-		values
-		(
-			@Major,
-			@Minor,
-			@Build,
-			@Revision,
-			@FriendlyNameShort,
-			@FriendlyNameLong,
-			@IsSupported,
-			@ReleaseDate
-		);
-
-		return 0;
-	end try
-	begin catch
-		return -1;
-	end catch
+	insert into dbo.Version
+	(
+		Major,
+		Minor,
+		Build,
+		Revision,
+		FriendlyNameShort,
+		FriendlyNameLong,
+		IsSupported,
+		ReleaseDate
+	)
+	values
+	(
+		@Major,
+		@Minor,
+		@Build,
+		@Revision,
+		@FriendlyNameShort,
+		@FriendlyNameLong,
+		@IsSupported,
+		@ReleaseDate
+	);
 go

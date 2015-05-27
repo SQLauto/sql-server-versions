@@ -495,11 +495,6 @@ namespace SqlServerVersions.Controllers
                         Value = newVersionInfo.IsSupported
                     });
 
-                SqlCmd.Parameters.Add(new SqlParameter("@ReturnVal", SqlDbType.Int)
-                    {
-                        Direction = ParameterDirection.ReturnValue
-                    });
-
                 try
                 {
                     DatabaseConnection.Open();
@@ -514,14 +509,6 @@ namespace SqlServerVersions.Controllers
                 {
                     DatabaseConnection.Dispose();
                 }
-
-                // do a few return val tests to see if we need to continue 
-                // and if they fail then fail the method by returning false
-                //
-                if (SqlCmd.Parameters["@ReturnVal"].Value == DBNull.Value)
-                    return false;
-                if (Convert.ToInt32(SqlCmd.Parameters["@ReturnVal"].Value) != 0)
-                    return false;
 
                 // try to add the reference links, and if that fails then we need 
                 // to do a programmatic rollback of the added version, because this 
