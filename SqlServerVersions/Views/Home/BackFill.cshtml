@@ -64,9 +64,9 @@
             }
             else
             {
-                @Html.HiddenFor(m => m.BackFillBuild.Major)
-                @Html.HiddenFor(m => m.BackFillBuild.Minor)
-                @Html.HiddenFor(m => m.BackFillBuild.Build)
+                @Html.HiddenFor(m => m.BackFillBuild.Major, new { @Value = Model.BackFillBuild.Major.ToString() })
+                @Html.HiddenFor(m => m.BackFillBuild.Minor, new { @Value = Model.BackFillBuild.Minor.ToString() })
+                @Html.HiddenFor(m => m.BackFillBuild.Build, new { @Value = Model.BackFillBuild.Build.ToString() })
                 <table class="main-view">
                     <tr>
                         <td width="50%">
